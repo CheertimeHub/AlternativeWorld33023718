@@ -10,3 +10,6 @@ export_presets.cfg
 # OS
 .DS_Store
 Thumbs.db
+
+# Environment
+.env

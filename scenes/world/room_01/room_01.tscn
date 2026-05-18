@@ -1,0 +1,183 @@
+[gd_scene format=3 uid="uid://room01"]
+
+[ext_resource type="Script" uid="uid://ba63qtajixy1t" path="res://scripts/world/room_01.gd" id="1_room"]
+[ext_resource type="Script" uid="uid://cq710hemva4ns" path="res://scripts/linuxos/linuxos.gd" id="2_linuxos"]
+[ext_resource type="Script" uid="uid://hmu7odm32eqi" path="res://scripts/ui/chat_box.gd" id="3_chatbox"]
+[ext_resource type="Texture2D" uid="uid://b4jqsw1c6jk3x" path="res://assets/sprites/linuxos/idle_sheet.png" id="4_linuxos_idle"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle_sheet.png" id="5_player_idle"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lf1"]
+atlas = ExtResource("4_linuxos_idle")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lf2"]
+atlas = ExtResource("4_linuxos_idle")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lf3"]
+atlas = ExtResource("4_linuxos_idle")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lf4"]
+atlas = ExtResource("4_linuxos_idle")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_linuxos"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lf1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lf2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lf3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lf4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pf1"]
+atlas = ExtResource("5_player_idle")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pf2"]
+atlas = ExtResource("5_player_idle")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pf3"]
+atlas = ExtResource("5_player_idle")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pf4"]
+atlas = ExtResource("5_player_idle")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pf5"]
+atlas = ExtResource("5_player_idle")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_player"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pf1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pf2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pf3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pf4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pf5")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[node name="Room01" type="Node2D" unique_id=772270159]
+script = ExtResource("1_room")
+
+[node name="Background" type="ColorRect" parent="." unique_id=59706891]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.05, 0.05, 0.05, 1)
+
+[node name="Furniture" type="Node2D" parent="." unique_id=151822191]
+
+[node name="Desk" type="ColorRect" parent="Furniture" unique_id=1385192504]
+offset_left = 340.0
+offset_top = 420.0
+offset_right = 600.0
+offset_bottom = 480.0
+color = Color(0.15, 0.12, 0.08, 1)
+
+[node name="Monitor" type="ColorRect" parent="Furniture" unique_id=1073835152]
+offset_left = 390.0
+offset_top = 340.0
+offset_right = 560.0
+offset_bottom = 425.0
+color = Color(0.08, 0.08, 0.12, 1)
+
+[node name="MonitorGlow" type="ColorRect" parent="Furniture" unique_id=709360261]
+offset_left = 395.0
+offset_top = 345.0
+offset_right = 555.0
+offset_bottom = 420.0
+color = Color(0, 0.5, 0.3, 0.15)
+
+[node name="LinuxOS" type="AnimatedSprite2D" parent="." unique_id=1001330964]
+position = Vector2(476, 380)
+scale = Vector2(2.0, 2.0)
+sprite_frames = SubResource("SpriteFrames_linuxos")
+animation = &"idle"
+script = ExtResource("2_linuxos")
+
+[node name="NameLabel" type="Label" parent="LinuxOS" unique_id=88763797]
+position = Vector2(-30, -70)
+theme_override_colors/font_color = Color(0.4, 0.8, 0.5, 0.7)
+theme_override_font_sizes/font_size = 10
+text = "LinuxOS"
+
+[node name="Player" type="AnimatedSprite2D" parent="."]
+position = Vector2(200, 450)
+scale = Vector2(5.0, 5.0)
+sprite_frames = SubResource("SpriteFrames_player")
+animation = &"idle"
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=341582874]
+
+[node name="ChatBox" type="Control" parent="UI" unique_id=960607070]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_chatbox")
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="ColorRect" parent="UI/ChatBox" unique_id=1343565758]
+layout_mode = 0
+offset_left = 780.0
+offset_top = 40.0
+offset_right = 1240.0
+offset_bottom = 680.0
+color = Color(0.04, 0.04, 0.04, 0.95)
+
+[node name="MessageLog" type="RichTextLabel" parent="UI/ChatBox" unique_id=1300940433]
+layout_mode = 0
+offset_left = 790.0
+offset_top = 50.0
+offset_right = 1235.0
+offset_bottom = 620.0
+theme_override_font_sizes/normal_font_size = 13
+bbcode_enabled = true
+scroll_following = true
+
+[node name="InputField" type="LineEdit" parent="UI/ChatBox" unique_id=188280968]
+layout_mode = 0
+offset_left = 790.0
+offset_top = 628.0
+offset_right = 1165.0
+offset_bottom = 660.0
+theme_override_font_sizes/font_size = 13
+placeholder_text = "พิมพ์หา LinuxOS..."
+
+[node name="SendButton" type="Button" parent="UI/ChatBox" unique_id=715834315]
+layout_mode = 0
+offset_left = 1170.0
+offset_top = 628.0
+offset_right = 1235.0
+offset_bottom = 660.0
+text = "ส่ง"

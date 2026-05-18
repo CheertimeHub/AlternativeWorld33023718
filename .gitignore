@@ -1,0 +1,12 @@
+# Godot cache
+.godot/
+
+# Import files
+*.import
+
+# Export presets
+export_presets.cfg
+
+# OS
+.DS_Store
+Thumbs.db

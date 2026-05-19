@@ -4,14 +4,14 @@ extends Control
 @onready var input_field: LineEdit = $InputField
 @onready var send_button: Button = $SendButton
 
-var linuxos: AnimatedSprite2D
+var linuxos: CharacterBody2D
 
 func _ready() -> void:
 	send_button.pressed.connect(_on_send)
 	input_field.text_submitted.connect(_on_send)
 	_append_message("[ LinuxOS is online ]", "#555555")
 
-func setup(target: AnimatedSprite2D) -> void:
+func setup(target: CharacterBody2D) -> void:
 	linuxos = target
 	linuxos.response_ready.connect(_on_linuxos_response)
 

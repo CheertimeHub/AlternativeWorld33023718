@@ -1,7 +1,7 @@
 extends Node2D
 
 func _ready() -> void:
-	var linuxos := $World/LinuxOS
+	var linuxos := $LinuxOS
 	var chat_box := $UI/ChatBox
 	chat_box.setup(linuxos)
 	chat_box.visible = false

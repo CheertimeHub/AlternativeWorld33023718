@@ -1,0 +1,1011 @@
+[gd_scene format=3 uid="uid://linuxroom"]
+
+[ext_resource type="Script" uid="uid://b26u8qhphsebt" path="res://scripts/world/linux_room.gd" id="1_room"]
+[ext_resource type="Script" uid="uid://cq710hemva4ns" path="res://scripts/linuxos/linuxos.gd" id="2_linuxos"]
+[ext_resource type="Script" uid="uid://hmu7odm32eqi" path="res://scripts/ui/chat_box.gd" id="3_chatbox"]
+[ext_resource type="Script" uid="uid://bkt041p8j41m7" path="res://scripts/player/player.gd" id="4_player"]
+[ext_resource type="Texture2D" uid="uid://coy2gbx6bosp" path="res://assets/sprites/player/idle_sheet.png" id="4_tt6bd"]
+[ext_resource type="Texture2D" uid="uid://dfwvxwx2tf2jd" path="res://assets/sprites/player/walk.png" id="5_walk"]
+[ext_resource type="Texture2D" uid="uid://k5xjqwk6yj0r" path="res://assets/sprites/player/run.png" id="6_run"]
+
+[sub_resource type="RectangleShape2D" id="RectShape_wall_top"]
+size = Vector2(960, 20)
+
+[sub_resource type="RectangleShape2D" id="RectShape_wall_bottom"]
+size = Vector2(960, 20)
+
+[sub_resource type="RectangleShape2D" id="RectShape_wall_left"]
+size = Vector2(20, 540)
+
+[sub_resource type="RectangleShape2D" id="RectShape_wall_right"]
+size = Vector2(20, 540)
+
+[sub_resource type="CircleShape2D" id="CircleShape_linuxos"]
+
+[sub_resource type="CircleShape2D" id="CircleShape_interact"]
+radius = 80.0
+
+[sub_resource type="CircleShape2D" id="CircleShape_player"]
+radius = 8.0
+
+[sub_resource type="AtlasTexture" id="AT_id0"]
+atlas = ExtResource("4_tt6bd")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_id1"]
+atlas = ExtResource("4_tt6bd")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_id2"]
+atlas = ExtResource("4_tt6bd")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_id3"]
+atlas = ExtResource("4_tt6bd")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_is0"]
+atlas = ExtResource("4_tt6bd")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_is1"]
+atlas = ExtResource("4_tt6bd")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_is2"]
+atlas = ExtResource("4_tt6bd")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_is3"]
+atlas = ExtResource("4_tt6bd")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_frmw1"]
+atlas = ExtResource("4_tt6bd")
+region = Rect2(0, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dyetk"]
+atlas = ExtResource("4_tt6bd")
+region = Rect2(24, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yus3w"]
+atlas = ExtResource("4_tt6bd")
+region = Rect2(48, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vo60m"]
+atlas = ExtResource("4_tt6bd")
+region = Rect2(72, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_110o1"]
+atlas = ExtResource("4_tt6bd")
+region = Rect2(0, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqwtj"]
+atlas = ExtResource("4_tt6bd")
+region = Rect2(24, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_va8hr"]
+atlas = ExtResource("4_tt6bd")
+region = Rect2(48, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfauh"]
+atlas = ExtResource("4_tt6bd")
+region = Rect2(72, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_rd0"]
+atlas = ExtResource("6_run")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_rd1"]
+atlas = ExtResource("6_run")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_rd2"]
+atlas = ExtResource("6_run")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_rd3"]
+atlas = ExtResource("6_run")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_rd4"]
+atlas = ExtResource("6_run")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_rd5"]
+atlas = ExtResource("6_run")
+region = Rect2(120, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_rs0"]
+atlas = ExtResource("6_run")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_rs1"]
+atlas = ExtResource("6_run")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_rs2"]
+atlas = ExtResource("6_run")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_rs3"]
+atlas = ExtResource("6_run")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_rs4"]
+atlas = ExtResource("6_run")
+region = Rect2(96, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_rs5"]
+atlas = ExtResource("6_run")
+region = Rect2(120, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_ru0"]
+atlas = ExtResource("6_run")
+region = Rect2(0, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_ru1"]
+atlas = ExtResource("6_run")
+region = Rect2(24, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_ru2"]
+atlas = ExtResource("6_run")
+region = Rect2(48, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_ru3"]
+atlas = ExtResource("6_run")
+region = Rect2(72, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_ru4"]
+atlas = ExtResource("6_run")
+region = Rect2(96, 72, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_ru5"]
+atlas = ExtResource("6_run")
+region = Rect2(120, 72, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_rus0"]
+atlas = ExtResource("6_run")
+region = Rect2(0, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_rus1"]
+atlas = ExtResource("6_run")
+region = Rect2(24, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_rus2"]
+atlas = ExtResource("6_run")
+region = Rect2(48, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_rus3"]
+atlas = ExtResource("6_run")
+region = Rect2(72, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_rus4"]
+atlas = ExtResource("6_run")
+region = Rect2(96, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_rus5"]
+atlas = ExtResource("6_run")
+region = Rect2(120, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_wd0"]
+atlas = ExtResource("5_walk")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_wd1"]
+atlas = ExtResource("5_walk")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_wd2"]
+atlas = ExtResource("5_walk")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_wd3"]
+atlas = ExtResource("5_walk")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_ws0"]
+atlas = ExtResource("5_walk")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_ws1"]
+atlas = ExtResource("5_walk")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_ws2"]
+atlas = ExtResource("5_walk")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_ws3"]
+atlas = ExtResource("5_walk")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_wu0"]
+atlas = ExtResource("5_walk")
+region = Rect2(0, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_wu1"]
+atlas = ExtResource("5_walk")
+region = Rect2(24, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_wu2"]
+atlas = ExtResource("5_walk")
+region = Rect2(48, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_wu3"]
+atlas = ExtResource("5_walk")
+region = Rect2(72, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_wus0"]
+atlas = ExtResource("5_walk")
+region = Rect2(0, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_wus1"]
+atlas = ExtResource("5_walk")
+region = Rect2(24, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_wus2"]
+atlas = ExtResource("5_walk")
+region = Rect2(48, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AT_wus3"]
+atlas = ExtResource("5_walk")
+region = Rect2(72, 96, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rqb3y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_id0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_id1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_id2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_id3")
+}],
+"loop": true,
+"name": &"idle_down",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_is0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_is1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_is2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_is3")
+}],
+"loop": true,
+"name": &"idle_side",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_frmw1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dyetk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yus3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vo60m")
+}],
+"loop": true,
+"name": &"idle_up",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_110o1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tqwtj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_va8hr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mfauh")
+}],
+"loop": true,
+"name": &"idle_up_side",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_rd0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_rd1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_rd2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_rd3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_rd4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_rd5")
+}],
+"loop": true,
+"name": &"run_down",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_rs0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_rs1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_rs2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_rs3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_rs4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_rs5")
+}],
+"loop": true,
+"name": &"run_side",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_ru0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_ru1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_ru2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_ru3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_ru4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_ru5")
+}],
+"loop": true,
+"name": &"run_up",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_rus0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_rus1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_rus2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_rus3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_rus4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_rus5")
+}],
+"loop": true,
+"name": &"run_up_side",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_wd0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_wd1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_wd2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_wd3")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_ws0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_ws1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_ws2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_ws3")
+}],
+"loop": true,
+"name": &"walk_side",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_wu0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_wu1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_wu2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_wu3")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_wus0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_wus1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_wus2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_wus3")
+}],
+"loop": true,
+"name": &"walk_up_side",
+"speed": 10.0
+}]
+
+[node name="LinuxRoom" type="Node2D" unique_id=1069364066]
+script = ExtResource("1_room")
+
+[node name="OuterBg" type="ColorRect" parent="." unique_id=844401142]
+offset_left = -2000.0
+offset_top = -2000.0
+offset_right = 3000.0
+offset_bottom = 3000.0
+color = Color(0.01, 0.01, 0.02, 1)
+
+[node name="Floor" type="ColorRect" parent="." unique_id=1082486773]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 928.0
+offset_bottom = 508.0
+color = Color(0.07, 0.06, 0.09, 1)
+
+[node name="WallTop" type="ColorRect" parent="." unique_id=841471939]
+offset_right = 960.0
+offset_bottom = 32.0
+color = Color(0.04, 0.03, 0.06, 1)
+
+[node name="WallBottom" type="ColorRect" parent="." unique_id=1135052852]
+offset_top = 508.0
+offset_right = 960.0
+offset_bottom = 540.0
+color = Color(0.04, 0.03, 0.06, 1)
+
+[node name="WallLeft" type="ColorRect" parent="." unique_id=429700698]
+offset_top = 32.0
+offset_right = 32.0
+offset_bottom = 508.0
+color = Color(0.04, 0.03, 0.06, 1)
+
+[node name="WallRight" type="ColorRect" parent="." unique_id=1517106136]
+offset_left = 928.0
+offset_top = 32.0
+offset_right = 960.0
+offset_bottom = 508.0
+color = Color(0.04, 0.03, 0.06, 1)
+
+[node name="EdgeTop" type="ColorRect" parent="." unique_id=513714348]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 928.0
+offset_bottom = 34.0
+color = Color(0.2, 0.4, 0.3, 0.6)
+
+[node name="EdgeBottom" type="ColorRect" parent="." unique_id=216565741]
+offset_left = 32.0
+offset_top = 506.0
+offset_right = 928.0
+offset_bottom = 508.0
+color = Color(0.2, 0.4, 0.3, 0.6)
+
+[node name="EdgeLeft" type="ColorRect" parent="." unique_id=2047809064]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 34.0
+offset_bottom = 508.0
+color = Color(0.2, 0.4, 0.3, 0.6)
+
+[node name="EdgeRight" type="ColorRect" parent="." unique_id=84306261]
+offset_left = 926.0
+offset_top = 32.0
+offset_right = 928.0
+offset_bottom = 508.0
+color = Color(0.2, 0.4, 0.3, 0.6)
+
+[node name="Furniture" type="Node2D" parent="." unique_id=517019142]
+
+[node name="WindowLeft" type="ColorRect" parent="Furniture" unique_id=1037443453]
+offset_left = 60.0
+offset_top = 36.0
+offset_right = 160.0
+offset_bottom = 90.0
+color = Color(0.15, 0.12, 0.1, 1)
+
+[node name="WindowLeftGlass" type="ColorRect" parent="Furniture/WindowLeft" unique_id=624509881]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 96.0
+offset_bottom = 46.0
+color = Color(0.1, 0.2, 0.35, 0.85)
+
+[node name="WindowLeftDivH" type="ColorRect" parent="Furniture/WindowLeft" unique_id=426063796]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 24.0
+offset_right = 96.0
+offset_bottom = 26.0
+color = Color(0.15, 0.12, 0.1, 0.9)
+
+[node name="WindowLeftDivV" type="ColorRect" parent="Furniture/WindowLeft" unique_id=1005620005]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 4.0
+offset_right = 51.0
+offset_bottom = 46.0
+color = Color(0.15, 0.12, 0.1, 0.9)
+
+[node name="WindowRight" type="ColorRect" parent="Furniture" unique_id=2074666541]
+offset_left = 800.0
+offset_top = 36.0
+offset_right = 900.0
+offset_bottom = 90.0
+color = Color(0.15, 0.12, 0.1, 1)
+
+[node name="WindowRightGlass" type="ColorRect" parent="Furniture/WindowRight" unique_id=1718645571]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 96.0
+offset_bottom = 46.0
+color = Color(0.1, 0.2, 0.35, 0.85)
+
+[node name="WindowRightDivH" type="ColorRect" parent="Furniture/WindowRight" unique_id=1525455915]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 24.0
+offset_right = 96.0
+offset_bottom = 26.0
+color = Color(0.15, 0.12, 0.1, 0.9)
+
+[node name="WindowRightDivV" type="ColorRect" parent="Furniture/WindowRight" unique_id=1043433324]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 4.0
+offset_right = 51.0
+offset_bottom = 46.0
+color = Color(0.15, 0.12, 0.1, 0.9)
+
+[node name="CRT_Shelf" type="ColorRect" parent="Furniture" unique_id=372040802]
+offset_left = 240.0
+offset_top = 100.0
+offset_right = 720.0
+offset_bottom = 116.0
+color = Color(0.12, 0.09, 0.07, 1)
+
+[node name="CRT_1" type="ColorRect" parent="Furniture" unique_id=213111815]
+offset_left = 248.0
+offset_top = 52.0
+offset_right = 352.0
+offset_bottom = 108.0
+color = Color(0.08, 0.08, 0.1, 1)
+
+[node name="Screen_1" type="ColorRect" parent="Furniture/CRT_1" unique_id=1184347254]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 99.0
+offset_bottom = 51.0
+color = Color(0, 0.3, 0.18, 1)
+
+[node name="Glow_1" type="ColorRect" parent="Furniture/CRT_1" unique_id=1024049451]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 99.0
+offset_bottom = 51.0
+color = Color(0, 1, 0.5, 0.05)
+
+[node name="CRT_2" type="ColorRect" parent="Furniture" unique_id=950480658]
+offset_left = 360.0
+offset_top = 52.0
+offset_right = 464.0
+offset_bottom = 108.0
+color = Color(0.08, 0.08, 0.1, 1)
+
+[node name="Screen_2" type="ColorRect" parent="Furniture/CRT_2" unique_id=1188903683]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 99.0
+offset_bottom = 51.0
+color = Color(0, 0.3, 0.18, 1)
+
+[node name="Glow_2" type="ColorRect" parent="Furniture/CRT_2" unique_id=713323375]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 99.0
+offset_bottom = 51.0
+color = Color(0, 1, 0.5, 0.05)
+
+[node name="CRT_3" type="ColorRect" parent="Furniture" unique_id=501240854]
+offset_left = 472.0
+offset_top = 52.0
+offset_right = 576.0
+offset_bottom = 108.0
+color = Color(0.08, 0.08, 0.1, 1)
+
+[node name="Screen_3" type="ColorRect" parent="Furniture/CRT_3" unique_id=930911476]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 99.0
+offset_bottom = 51.0
+color = Color(0, 0.3, 0.18, 1)
+
+[node name="Glow_3" type="ColorRect" parent="Furniture/CRT_3" unique_id=270772877]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 99.0
+offset_bottom = 51.0
+color = Color(0, 1, 0.5, 0.05)
+
+[node name="CRT_4" type="ColorRect" parent="Furniture" unique_id=1310164115]
+offset_left = 584.0
+offset_top = 52.0
+offset_right = 688.0
+offset_bottom = 108.0
+color = Color(0.08, 0.08, 0.1, 1)
+
+[node name="Screen_4" type="ColorRect" parent="Furniture/CRT_4" unique_id=126489725]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 99.0
+offset_bottom = 51.0
+color = Color(0, 0.3, 0.18, 1)
+
+[node name="Glow_4" type="ColorRect" parent="Furniture/CRT_4" unique_id=1180528521]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 99.0
+offset_bottom = 51.0
+color = Color(0, 1, 0.5, 0.05)
+
+[node name="CRT_GlowAmbient" type="ColorRect" parent="Furniture" unique_id=314895024]
+offset_left = 230.0
+offset_top = 48.0
+offset_right = 700.0
+offset_bottom = 130.0
+color = Color(0, 0.5, 0.3, 0.04)
+
+[node name="PlantBackLeft" type="ColorRect" parent="Furniture" unique_id=1833935077]
+offset_left = 36.0
+offset_top = 50.0
+offset_right = 72.0
+offset_bottom = 110.0
+color = Color(0.07, 0.18, 0.09, 1)
+
+[node name="PlantBackLeftPot" type="ColorRect" parent="Furniture" unique_id=357630753]
+offset_left = 44.0
+offset_top = 104.0
+offset_right = 64.0
+offset_bottom = 120.0
+color = Color(0.2, 0.13, 0.08, 1)
+
+[node name="PlantBackRight" type="ColorRect" parent="Furniture" unique_id=201087965]
+offset_left = 888.0
+offset_top = 50.0
+offset_right = 924.0
+offset_bottom = 110.0
+color = Color(0.07, 0.18, 0.09, 1)
+
+[node name="PlantBackRightPot" type="ColorRect" parent="Furniture" unique_id=478540410]
+offset_left = 896.0
+offset_top = 104.0
+offset_right = 916.0
+offset_bottom = 120.0
+color = Color(0.2, 0.13, 0.08, 1)
+
+[node name="SofaBack" type="ColorRect" parent="Furniture" unique_id=1601275375]
+offset_left = 333.0
+offset_top = 238.0
+offset_right = 627.0
+offset_bottom = 272.0
+color = Color(0.2, 0.14, 0.26, 1)
+
+[node name="Sofa" type="ColorRect" parent="Furniture" unique_id=344060956]
+offset_left = 333.0
+offset_top = 270.0
+offset_right = 627.0
+offset_bottom = 330.0
+color = Color(0.16, 0.11, 0.21, 1)
+
+[node name="SofaArmLeft" type="ColorRect" parent="Furniture" unique_id=884829783]
+offset_left = 321.0
+offset_top = 248.0
+offset_right = 341.0
+offset_bottom = 330.0
+color = Color(0.2, 0.14, 0.26, 1)
+
+[node name="SofaArmRight" type="ColorRect" parent="Furniture" unique_id=1800283370]
+offset_left = 621.0
+offset_top = 248.0
+offset_right = 641.0
+offset_bottom = 330.0
+color = Color(0.2, 0.14, 0.26, 1)
+
+[node name="SofaCushionL" type="ColorRect" parent="Furniture" unique_id=1150247341]
+offset_left = 341.0
+offset_top = 274.0
+offset_right = 478.0
+offset_bottom = 300.0
+color = Color(0.24, 0.17, 0.3, 1)
+
+[node name="SofaCushionR" type="ColorRect" parent="Furniture" unique_id=1141659335]
+offset_left = 484.0
+offset_top = 274.0
+offset_right = 619.0
+offset_bottom = 300.0
+color = Color(0.24, 0.17, 0.3, 1)
+
+[node name="LampPole" type="ColorRect" parent="Furniture" unique_id=1901637064]
+offset_left = 278.0
+offset_top = 300.0
+offset_right = 284.0
+offset_bottom = 338.0
+color = Color(0.28, 0.22, 0.18, 1)
+
+[node name="LampShade" type="ColorRect" parent="Furniture" unique_id=1360108497]
+offset_left = 262.0
+offset_top = 285.0
+offset_right = 300.0
+offset_bottom = 302.0
+color = Color(0.38, 0.32, 0.2, 1)
+
+[node name="LampGlow" type="ColorRect" parent="Furniture" unique_id=607011059]
+offset_left = 230.0
+offset_top = 295.0
+offset_right = 340.0
+offset_bottom = 380.0
+color = Color(0.5, 0.4, 0.1, 0.04)
+
+[node name="CoffeeTable" type="ColorRect" parent="Furniture" unique_id=140878494]
+offset_left = 370.0
+offset_top = 340.0
+offset_right = 590.0
+offset_bottom = 370.0
+color = Color(0.14, 0.1, 0.07, 1)
+
+[node name="CoffeeTableTop" type="ColorRect" parent="Furniture" unique_id=1169005884]
+offset_left = 372.0
+offset_top = 340.0
+offset_right = 588.0
+offset_bottom = 350.0
+color = Color(0.2, 0.15, 0.1, 1)
+
+[node name="PlantFrontLeft" type="ColorRect" parent="Furniture" unique_id=1186757407]
+offset_left = 36.0
+offset_top = 380.0
+offset_right = 80.0
+offset_bottom = 450.0
+color = Color(0.07, 0.2, 0.09, 1)
+
+[node name="PlantFrontLeftPot" type="ColorRect" parent="Furniture" unique_id=844349533]
+offset_left = 46.0
+offset_top = 442.0
+offset_right = 70.0
+offset_bottom = 462.0
+color = Color(0.2, 0.13, 0.08, 1)
+
+[node name="PlantFrontRight" type="ColorRect" parent="Furniture" unique_id=725246681]
+offset_left = 880.0
+offset_top = 380.0
+offset_right = 924.0
+offset_bottom = 450.0
+color = Color(0.07, 0.2, 0.09, 1)
+
+[node name="PlantFrontRightPot" type="ColorRect" parent="Furniture" unique_id=631970624]
+offset_left = 890.0
+offset_top = 442.0
+offset_right = 914.0
+offset_bottom = 462.0
+color = Color(0.2, 0.13, 0.08, 1)
+
+[node name="Door" type="ColorRect" parent="Furniture" unique_id=2144091749]
+offset_left = 420.0
+offset_top = 496.0
+offset_right = 540.0
+offset_bottom = 508.0
+color = Color(0.25, 0.18, 0.12, 1)
+
+[node name="DoorLabel" type="Label" parent="Furniture/Door" unique_id=340103255]
+layout_mode = 0
+offset_left = 16.0
+offset_top = -14.0
+offset_right = 16.0
+offset_bottom = -14.0
+theme_override_colors/font_color = Color(0.5, 0.4, 0.3, 0.7)
+theme_override_font_sizes/font_size = 9
+text = "[ exit ]"
+
+[node name="SpawnPoint" type="Node2D" parent="." unique_id=1814308299]
+position = Vector2(480, 400)
+
+[node name="SpawnCircle" type="ColorRect" parent="SpawnPoint" unique_id=1691719215]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+color = Color(0.3, 0.6, 1, 0.08)
+
+[node name="SpawnRing" type="ColorRect" parent="SpawnPoint" unique_id=351683839]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = -8.0
+color = Color(0.3, 0.6, 1, 0.35)
+
+[node name="CollisionTop" type="StaticBody2D" parent="." unique_id=956839082]
+position = Vector2(480, 10)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionTop" unique_id=416941860]
+shape = SubResource("RectShape_wall_top")
+
+[node name="CollisionBottom" type="StaticBody2D" parent="." unique_id=1455240765]
+position = Vector2(480, 530)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionBottom" unique_id=1028902436]
+shape = SubResource("RectShape_wall_bottom")
+
+[node name="CollisionLeft" type="StaticBody2D" parent="." unique_id=255185556]
+position = Vector2(10, 270)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionLeft" unique_id=582170421]
+shape = SubResource("RectShape_wall_left")
+
+[node name="CollisionRight" type="StaticBody2D" parent="." unique_id=1915737642]
+position = Vector2(950, 270)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionRight" unique_id=1923648369]
+shape = SubResource("RectShape_wall_right")
+
+[node name="LinuxOS" type="CharacterBody2D" parent="." unique_id=1658862219]
+position = Vector2(480, 278)
+script = ExtResource("2_linuxos")
+
+[node name="Visual" type="ColorRect" parent="LinuxOS" unique_id=139464583]
+offset_left = -12.0
+offset_top = -20.0
+offset_right = 12.0
+offset_bottom = 16.0
+color = Color(0.2, 0.8, 0.5, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LinuxOS" unique_id=1450173793]
+shape = SubResource("CircleShape_linuxos")
+
+[node name="NameLabel" type="Label" parent="LinuxOS" unique_id=144161887]
+offset_left = -20.0
+offset_top = -28.0
+offset_right = -20.0
+offset_bottom = -28.0
+theme_override_colors/font_color = Color(0.4, 0.9, 0.5, 1)
+theme_override_font_sizes/font_size = 10
+text = "LinuxOS"
+
+[node name="InteractZone" type="Area2D" parent="LinuxOS" unique_id=325274307]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LinuxOS/InteractZone" unique_id=1881187632]
+shape = SubResource("CircleShape_interact")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=826386927]
+position = Vector2(480, 400)
+script = ExtResource("4_player")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=389978354]
+shape = SubResource("CircleShape_player")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1897219036]
+zoom = Vector2(1.5, 1.5)
+limit_left = 32
+limit_top = 32
+limit_right = 928
+limit_bottom = 508
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=289835049]
+position = Vector2(1.1444092e-05, -18.000011)
+scale = Vector2(1.9583342, 1.9583342)
+sprite_frames = SubResource("SpriteFrames_rqb3y")
+animation = &"idle_up"
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=2028654626]
+
+[node name="ChatBox" type="Control" parent="UI" unique_id=903505514]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_chatbox")
+
+[node name="Panel" type="ColorRect" parent="UI/ChatBox" unique_id=1771202721]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 300.0
+offset_right = 1240.0
+offset_bottom = 680.0
+color = Color(0.04, 0.04, 0.04, 0.95)
+
+[node name="MessageLog" type="RichTextLabel" parent="UI/ChatBox" unique_id=1048644980]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 310.0
+offset_right = 1230.0
+offset_bottom = 620.0
+theme_override_font_sizes/normal_font_size = 13
+bbcode_enabled = true
+scroll_following = true
+
+[node name="InputField" type="LineEdit" parent="UI/ChatBox" unique_id=1295826972]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 628.0
+offset_right = 1165.0
+offset_bottom = 660.0
+theme_override_font_sizes/font_size = 13
+placeholder_text = "พิมพ์หา LinuxOS..."
+
+[node name="SendButton" type="Button" parent="UI/ChatBox" unique_id=1443230692]
+layout_mode = 0
+offset_left = 1170.0
+offset_top = 628.0
+offset_right = 1235.0
+offset_bottom = 660.0
+text = "ส่ง"

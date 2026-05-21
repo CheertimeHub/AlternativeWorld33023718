@@ -472,24 +472,75 @@ position = Vector2(480, 300)
 collision_layer = 2
 script = ExtResource("2_linuxos")
 
-[node name="Visual" type="ColorRect" parent="LinuxOS" unique_id=139464583]
-offset_left = -12.0
-offset_top = -20.0
-offset_right = 12.0
-offset_bottom = 16.0
-color = Color(0.2, 0.8, 0.5, 1)
+[node name="Visual" type="Node2D" parent="LinuxOS" unique_id=139464583]
+
+[node name="HairL" type="ColorRect" parent="LinuxOS/Visual" unique_id=139464590]
+offset_left = -7.0
+offset_top = -24.0
+offset_right = -1.0
+offset_bottom = -17.0
+color = Color(0.3, 0.7, 1.0, 1)
+
+[node name="HairR" type="ColorRect" parent="LinuxOS/Visual" unique_id=139464591]
+offset_left = 1.0
+offset_top = -24.0
+offset_right = 7.0
+offset_bottom = -17.0
+color = Color(1.0, 0.4, 0.7, 1)
+
+[node name="Head" type="ColorRect" parent="LinuxOS/Visual" unique_id=139464592]
+offset_left = -6.0
+offset_top = -17.0
+offset_right = 6.0
+offset_bottom = -8.0
+color = Color(0.78, 0.88, 1.0, 1)
+
+[node name="Body" type="ColorRect" parent="LinuxOS/Visual" unique_id=139464593]
+offset_left = -7.0
+offset_top = -8.0
+offset_right = 7.0
+offset_bottom = 6.0
+color = Color(0.65, 0.8, 1.0, 1)
+
+[node name="ArmL" type="ColorRect" parent="LinuxOS/Visual" unique_id=139464596]
+offset_left = -11.0
+offset_top = -7.0
+offset_right = -7.0
+offset_bottom = 4.0
+color = Color(0.78, 0.88, 1.0, 1)
+
+[node name="ArmR" type="ColorRect" parent="LinuxOS/Visual" unique_id=139464597]
+offset_left = 7.0
+offset_top = -7.0
+offset_right = 11.0
+offset_bottom = 4.0
+color = Color(0.78, 0.88, 1.0, 1)
+
+[node name="LegL" type="ColorRect" parent="LinuxOS" unique_id=139464594]
+offset_left = -6.0
+offset_top = 6.0
+offset_right = -1.0
+offset_bottom = 14.0
+color = Color(0.35, 0.55, 0.9, 1)
+
+[node name="LegR" type="ColorRect" parent="LinuxOS" unique_id=139464595]
+offset_left = 1.0
+offset_top = 6.0
+offset_right = 6.0
+offset_bottom = 14.0
+color = Color(0.35, 0.55, 0.9, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LinuxOS" unique_id=1450173793]
 shape = SubResource("CapsuleShape2D_re7fo")
 
 [node name="NameLabel" type="Label" parent="LinuxOS" unique_id=144161887]
-offset_left = -20.0
-offset_top = -28.0
-offset_right = -20.0
-offset_bottom = -28.0
-theme_override_colors/font_color = Color(0.4, 0.9, 0.5, 1)
-theme_override_font_sizes/font_size = 10
-text = "LinuxOS"
+offset_left = -16.0
+offset_top = -44.0
+offset_right = 16.0
+offset_bottom = -34.0
+theme_override_colors/font_color = Color(0.5, 0.8, 1.0, 1)
+theme_override_font_sizes/font_size = 9
+text = "LUX"
 
 [node name="InteractPrompt" type="Sprite2D" parent="LinuxOS" unique_id=1113556419]
 visible = false

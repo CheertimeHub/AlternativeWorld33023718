@@ -12,6 +12,9 @@ var _is_moving := false
 @onready var leg_r: ColorRect = $LegR
 @onready var visual: Node2D = $Visual
 
+func _ready() -> void:
+	add_to_group("player")
+
 func _physics_process(delta: float) -> void:
 	var direction := Vector2.ZERO
 	direction.x = Input.get_axis("ui_left", "ui_right")
@@ -38,10 +41,10 @@ func _physics_process(delta: float) -> void:
 func _animate() -> void:
 	if _is_moving:
 		var swing = sin(_walk_time) * 4.0
-		leg_l.position.y = 4 + swing
-		leg_r.position.y = 4 - swing
+		leg_l.position.y = 6 + swing
+		leg_r.position.y = 6 - swing
 		visual.position.y = 0.0
 	else:
-		leg_l.position.y = 4.0
-		leg_r.position.y = 4.0
+		leg_l.position.y = 6.0
+		leg_r.position.y = 6.0
 		visual.position.y = sin(_idle_time * 1.2) * 1.0

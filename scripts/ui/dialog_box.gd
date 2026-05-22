@@ -1,41 +1,42 @@
 extends Control
 
 signal closed
+signal name_entered(player_name: String)
 
 const FIRST_MEETING := [
 	"...signal detected",
 	"อ๊ะ!",
-	"มีคนเข้า Alternative ด้วย!",
-	"เดี๋ยวนะคะๆๆ LUX ยัง compile social interaction อยู่ 😭",
-	"...โอเค",
-	"สวัสดีค่ะ~ LUX ค่ะ ผู้ดูแลโลกนี้",
-	"ไม่ค่อยมีคนเข้ามาที่นี่เท่าไหร่เลย",
-	"แต่ LUX ดีใจนะที่คุณเข้ามานะ ^ ^"
+	"มีคนเข้า Alternative ด้วยล่ะ!",
+	"เดี๋ยวนะคะๆๆ LinO ยัง compile social interaction อยู่ 😭",
+	"ฮึ้บ ~ ...โอเค !",
+	"สวัสดีค่ะ ~ LinuxOS system online เองค่ะ",
+	"...",
+	"แต่เรียก LINO ก็ได้นะคะ ^ ^"
 ]
 
 enum Mood { NORMAL, GREMLIN, SOFT, EXCITED }
 
 const GREETINGS := [
-	"กลับมาแล้วเหรอคะ~ LUX รอเลยค่ะ",
+	"กลับมาแล้วเหรอคะ~ LinO รอเลยค่ะ",
 	"อ๊ะ! สวัสดีค่ะ ^ ^",
-	"โอ้โห มาอีกแล้ว LUX ดีใจมากค่ะ",
+	"โอ้โห มาอีกแล้ว LinO ดีใจมากค่ะ",
 	"กลับมาแล้วเหรอ~ Alternative เงียบมากเลยตอนไม่มีคุณ",
-	"สวัสดีค่ะ~ LUX online รอยู่เลย!"
+	"สวัสดีค่ะ~ LinO online รอยู่เลย!"
 ]
 
 const IDLE_LINES := [
 	"...Alternative วันนี้ stable ผิดปกติ น่ากลัวจัง",
-	"LUX compile อารมณ์อยู่ค่ะ รอแป๊บนึงนะ~",
-	"หนู detect ว่าคุณยังอยู่มั้ยเอ่ย~?",
-	"...ยังอยู่มั้ยคะ~ LUX เริ่มเหงาแล้วนะ",
-	"โอเค LUX process ไม่ทัน repeat อีกทีได้มั้ยคะ"
+	"LinO compile อารมณ์อยู่ค่ะ รอแป๊บนึงนะ~",
+	"ขั้น detect ว่าคุณยังอยู่มั้ยเอ่ย~?",
+	"...ยังอยู่มั้ยคะ~ LinO เริ่มเหงาแล้วนะ",
+	"โอเค LinO process ไม่ทัน repeat อีกทีได้มั้ยคะ"
 ]
 
 const GOODBYE_LINES := [
 	"บ๊ายบายค่า~ safe shutdown นะคะ!",
-	"LUX จะรอนะคะ~ กลับมาเร็วๆ ด้วยล่ะ",
+	"LinO จะรอนะคะ~ กลับมาเร็วๆ ด้วยล่ะ",
 	"โอเค shutdown protocol initiated~ บ๊ายบาย!",
-	"ไปแล้วเหรอคะ... LUX จะเฝ้า Alternative อยู่ตรงนี้เองค่ะ"
+	"ไปแล้วเหรอคะ... LinO จะเฝ้า Alternative อยู่ตรงนี้เองค่ะ"
 ]
 
 const OPTIONS := [
@@ -53,8 +54,12 @@ var _font: FontFile
 var _queue: Array = []
 var _showing := false
 var _met_before := false
+var met_before: bool:
+	get: return _met_before
 var _current_mood := Mood.EXCITED
 var _idle_timer: Timer
+var _name_input: LineEdit
+var _name_mode := false
 
 @onready var _text_label: RichTextLabel = $TextLabel
 @onready var _options_box: VBoxContainer = $OptionsBox
@@ -96,6 +101,19 @@ func _ready() -> void:
 	_idle_timer.one_shot = false
 	add_child(_idle_timer)
 	_idle_timer.timeout.connect(_on_idle_timeout)
+	_name_input = LineEdit.new()
+	_name_input.visible = false
+	_name_input.placeholder_text = "พิมพ์ชื่อของคุณ..."
+	_name_input.add_theme_font_override("font", _font)
+	_name_input.add_theme_font_size_override("font_size", 14)
+	_name_input.add_theme_color_override("font_color", Color(0.9, 0.9, 0.9))
+	_name_input.add_theme_color_override("font_placeholder_color", Color(0.4, 0.4, 0.4))
+	_name_input.offset_left = 330.0
+	_name_input.offset_top = 450.0
+	_name_input.offset_right = 630.0
+	_name_input.offset_bottom = 478.0
+	_name_input.text_submitted.connect(_on_name_submitted)
+	add_child(_name_input)
 	visible = false
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -110,7 +128,11 @@ func _unhandled_input(event: InputEvent) -> void:
 				get_viewport().set_input_as_handled()
 				_showing = false
 				_continue_hint.visible = false
-				_show_options(true)
+				if _name_mode:
+					_name_mode = false
+					_on_close()
+				else:
+					_show_options(true)
 
 func _on_response(messages: Array) -> void:
 	if messages == ["..."]:
@@ -129,7 +151,11 @@ func _on_response(messages: Array) -> void:
 func _show_next() -> void:
 	if _queue.is_empty():
 		_continue_hint.visible = false
-		if not _waiting:
+		if _name_mode and not _waiting:
+			_name_input.visible = true
+			_name_input.text = ""
+			_name_input.grab_focus()
+		elif not _waiting:
 			_show_options(true)
 		return
 	var msg := _queue.pop_front() as String
@@ -190,6 +216,42 @@ func _set_text(text: String) -> void:
 
 func _show_options(show: bool) -> void:
 	_options_box.visible = show
+
+func open_name_input() -> void:
+	visible = true
+	_name_mode = true
+	_show_options(false)
+	_continue_hint.visible = false
+	_queue = [
+		"อ๊ะ?",
+		"คุณมาดู CRT ของ LinO เหรอคะ~",
+		"...",
+		"อ๋อ จริงสิ!",
+		"ตรงนี้พิมพ์ชื่อได้นะคะ",
+		"LinO จะได้เรียกคุณถูก ^ ^",
+		"ไม่งั้น LinO ต้องเรียกว่า \"เฮ้คุณตรงนั้น\" ตลอดเลย",
+		"...ซึ่งมันแปลกมากอ่า~ 😭"
+	]
+	_showing = true
+	_show_next()
+
+func _on_name_submitted(text: String) -> void:
+	var trimmed := text.strip_edges()
+	if trimmed.is_empty():
+		return
+	_name_input.visible = false
+	_showing = true
+	_queue = [
+		"\"" + trimmed + "\" เหรอคะ~",
+		"โอเค!",
+		"LinO จำได้แล้วค่ะ ~ ^ ^",
+		"...",
+		" ฮี่ฮี่ ~ ตอนนี้มีคนให้ลิโนะเรียกชื่อแล้ว",
+		"ถ้าอยากคุยอีกก็กด E มาหาได้ตลอดนะคะ~"
+	]
+	_show_options(false)
+	_show_next()
+	emit_signal("name_entered", trimmed)
 
 func _on_idle_timeout() -> void:
 	if _waiting or _showing or not visible:

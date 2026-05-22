@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b26u8qhphsebt" path="res://scripts/world/linux_room.gd" id="1_room"]
 [ext_resource type="Script" uid="uid://cq710hemva4ns" path="res://scripts/linuxos/linuxos.gd" id="2_linuxos"]
-[ext_resource type="Script" path="res://scripts/ui/dialog_box.gd" id="3_chatbox"]
+[ext_resource type="Script" uid="uid://bumpqplx4ove8" path="res://scripts/ui/dialog_box.gd" id="3_chatbox"]
 [ext_resource type="Script" uid="uid://bkt041p8j41m7" path="res://scripts/player/player.gd" id="4_player"]
 [ext_resource type="Texture2D" uid="uid://c371new64htjc" path="res://assets/ui/ui_flat_animated.png" id="5_ui"]
 
@@ -35,9 +35,9 @@ script = ExtResource("1_room")
 
 [node name="OuterBg" type="ColorRect" parent="." unique_id=844401142]
 offset_left = -2000.0
-offset_top = -2000.0
+offset_top = -2001.0
 offset_right = 3000.0
-offset_bottom = 3000.0
+offset_bottom = 2999.0
 color = Color(0.01, 0.01, 0.02, 1)
 
 [node name="Floor" type="ColorRect" parent="." unique_id=1082486773]
@@ -479,42 +479,42 @@ offset_left = -7.0
 offset_top = -24.0
 offset_right = -1.0
 offset_bottom = -17.0
-color = Color(0.3, 0.7, 1.0, 1)
+color = Color(0.3, 0.7, 1, 1)
 
 [node name="HairR" type="ColorRect" parent="LinuxOS/Visual" unique_id=139464591]
 offset_left = 1.0
 offset_top = -24.0
 offset_right = 7.0
 offset_bottom = -17.0
-color = Color(1.0, 0.4, 0.7, 1)
+color = Color(1, 0.4, 0.7, 1)
 
 [node name="Head" type="ColorRect" parent="LinuxOS/Visual" unique_id=139464592]
 offset_left = -6.0
 offset_top = -17.0
 offset_right = 6.0
 offset_bottom = -8.0
-color = Color(0.78, 0.88, 1.0, 1)
+color = Color(0.78, 0.88, 1, 1)
 
 [node name="Body" type="ColorRect" parent="LinuxOS/Visual" unique_id=139464593]
 offset_left = -7.0
 offset_top = -8.0
 offset_right = 7.0
 offset_bottom = 6.0
-color = Color(0.65, 0.8, 1.0, 1)
+color = Color(0.65, 0.8, 1, 1)
 
 [node name="ArmL" type="ColorRect" parent="LinuxOS/Visual" unique_id=139464596]
 offset_left = -11.0
 offset_top = -7.0
 offset_right = -7.0
 offset_bottom = 4.0
-color = Color(0.78, 0.88, 1.0, 1)
+color = Color(0.78, 0.88, 1, 1)
 
 [node name="ArmR" type="ColorRect" parent="LinuxOS/Visual" unique_id=139464597]
 offset_left = 7.0
 offset_top = -7.0
 offset_right = 11.0
 offset_bottom = 4.0
-color = Color(0.78, 0.88, 1.0, 1)
+color = Color(0.78, 0.88, 1, 1)
 
 [node name="LegL" type="ColorRect" parent="LinuxOS" unique_id=139464594]
 offset_left = -6.0
@@ -538,7 +538,7 @@ offset_left = -16.0
 offset_top = -44.0
 offset_right = 16.0
 offset_bottom = -34.0
-theme_override_colors/font_color = Color(0.5, 0.8, 1.0, 1)
+theme_override_colors/font_color = Color(0.5, 0.8, 1, 1)
 theme_override_font_sizes/font_size = 9
 text = "LUX"
 
@@ -617,7 +617,6 @@ script = ExtResource("3_chatbox")
 
 [node name="Panel" type="ColorRect" parent="UI/DialogBox" unique_id=1771202721]
 layout_mode = 0
-offset_left = 0.0
 offset_top = 360.0
 offset_right = 960.0
 offset_bottom = 540.0
@@ -625,19 +624,17 @@ color = Color(0.03, 0.03, 0.04, 0.95)
 
 [node name="PanelBorderTop" type="ColorRect" parent="UI/DialogBox" unique_id=1771202722]
 layout_mode = 0
-offset_left = 0.0
 offset_top = 360.0
 offset_right = 960.0
 offset_bottom = 362.0
-color = Color(0.9, 0.9, 0.9, 1.0)
+color = Color(0.9, 0.9, 0.9, 1)
 
 [node name="PanelBorderBottom" type="ColorRect" parent="UI/DialogBox" unique_id=1771202723]
 layout_mode = 0
-offset_left = 0.0
 offset_top = 538.0
 offset_right = 960.0
 offset_bottom = 540.0
-color = Color(0.9, 0.9, 0.9, 1.0)
+color = Color(0.9, 0.9, 0.9, 1)
 
 [node name="NameBox" type="ColorRect" parent="UI/DialogBox" unique_id=1771202724]
 layout_mode = 0
@@ -647,23 +644,23 @@ offset_right = 180.0
 offset_bottom = 362.0
 color = Color(0.03, 0.03, 0.04, 0.95)
 
-[node name="NameBoxBorder" type="ColorRect" parent="UI/DialogBox" unique_id=1771202726]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 340.0
-offset_right = 180.0
-offset_bottom = 342.0
-color = Color(0.9, 0.9, 0.9, 1.0)
-
 [node name="NameLabel" type="Label" parent="UI/DialogBox/NameBox" unique_id=1771202725]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 2.0
 offset_right = 158.0
 offset_bottom = 20.0
-theme_override_colors/font_color = Color(1.0, 1.0, 1.0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 11
 text = "[LINUXOS]"
+
+[node name="NameBoxBorder" type="ColorRect" parent="UI/DialogBox" unique_id=1771202726]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 340.0
+offset_right = 180.0
+offset_bottom = 342.0
+color = Color(0.9, 0.9, 0.9, 1)
 
 [node name="TextLabel" type="RichTextLabel" parent="UI/DialogBox" unique_id=1048644980]
 layout_mode = 0
@@ -673,7 +670,6 @@ offset_right = 930.0
 offset_bottom = 422.0
 theme_override_font_sizes/normal_font_size = 13
 bbcode_enabled = true
-autowrap_mode = 3
 
 [node name="OptionsBox" type="VBoxContainer" parent="UI/DialogBox" unique_id=1295826972]
 layout_mode = 0
@@ -682,6 +678,14 @@ offset_top = 425.0
 offset_right = 630.0
 offset_bottom = 535.0
 theme_override_constants/separation = 2
+
+[node name="ContinueHint" type="Label" parent="UI/DialogBox" unique_id=1443230691]
+layout_mode = 0
+offset_left = 800.0
+offset_top = 510.0
+offset_right = 938.0
+offset_bottom = 528.0
+text = "[ E ] ดูต่อ"
 
 [node name="CloseButton" type="Button" parent="UI/DialogBox" unique_id=1443230692]
 layout_mode = 0

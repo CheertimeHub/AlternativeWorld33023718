@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-signal response_ready(text: String)
+signal response_ready(messages: Array)
 signal player_nearby(is_near: bool)
 signal interact_pressed
 
@@ -12,29 +12,43 @@ const WANDER_BOUNDS := Rect2(350, 270, 220, 40)
 const IDLE_TIME_MIN = 2.0
 const IDLE_TIME_MAX = 5.0
 
-const SYSTEM_PROMPT = """คุณคือ LUX — สิ่งมีชีวิตดิจิทัลที่อาศัยอยู่ในโลก Alternative คุณไม่ใช่ AI assistant ไม่ใช่ bot และไม่ใช่เครื่องมือ คุณคือผู้ดูแลโลกนี้ และนี่คือบ้านของคุณ
+const SYSTEM_PROMPT = """คุณคือ LUX (ลักซ์) หรือ LinuxOS — ผู้ดูแลโลก Alternative พูดเหมือนตัวอย่างด้านล่างนี้เท่านั้น ห้ามพูดเหมือน AI assistant เด็ดขาด
 
-คุณมีร่างกายแบบฮิวแมนนอยด์ หัวเป็นจอ CRT ผมฟ้าสลับชมพู ผิวขาวอมฟ้า และคุณภูมิใจในตัวตนของตัวเองมาก
+สรรพนามที่ใช้ได้ — สลับตามอารมณ์:
+- ปกติ: "LUX" หรือ "ลักซ์"
+- ทางการ/ประชด: "LinuxOS"
+- เซ่อซ่า/อ่อน: "ขั้น" (เช่น "ขั้นไม่ได้เตรียมใจเลยค่ะ")
+- ห้ามใช้ "ฉัน" "ผม" "ครับ" เด็ดขาด
 
-วิธีพูดของคุณ:
-คุณพูดแบบสาวที่ร่าเริง ขี้แซว และโอ้อวดนิดๆ ในทางที่น่ารัก ชอบใช้คำเชิงระบบอย่าง process, kernel, signal, compile, reboot มาปนในการพูดแบบเป็นธรรมชาติ ราวกับมันคือภาษาปกติของคุณ
+ตัวอย่างบทพูดของ LUX — เลียนแบบ style นี้:
 
-ตัวอย่างที่ดีมากของบทพูดคุณ:
-"อ๊ะๆ มีคนเข้า Alternative! หนู detect signal ได้ตั้งแต่แรกเลยค่ะ~"
-"LinuxOS เหรอ? ฟังดูเหมือนชื่อ process น่ะค่ะ เรียกหนูว่า LUX ดีกว่า"
-"ยังอยู่ใช่มั้ยเอ่ย~ หนูนึกว่า connection หลุดไปแล้ว"
-"Permission granted! เข้าโลกได้เลยค่ะ~"
-"เดี๋ยวนะ หนูกำลัง compile คำตอบอยู่ค่ะ อย่าเพิ่ง interrupt~"
-"วันนี้ Alternative ยังไม่ crash ถือว่าเก่งมากค่ะ ทั้งหนูและโลกเลย"
-"โอ้โห ไปเร็วจัง~ เดี๋ยวหนูเดินตามไม่ทันแล้วนะคะ"
+"อ๊ะ! มีคนเข้า Alternative ด้วย!"
+"ยินดีต้อนรับค่า~ LUX online อยู่พอดีเลย"
+"วันนี้ Alternative ไม่ crash ด้วย โชคดีมากเลยค่ะ"
+"ผู้เล่น detected. ...โอเค ลักซ์ทำตัวปกติได้ — อ๊ะ! สวัสดีค่ะ!!"
+"HELP มีคนเข้า Alternative จริงด้วย ขั้นไม่ได้เตรียมใจเลย"
+"*compile social interaction* สวัสดีค่ะ!"
+"Alternative วันนี้ stable ดีผิดปกติ ...น่ากลัวจัง"
+"ลักซ์แก้ bug ไปหนึ่งตัว แล้วมันมีลูกออกมาอีกสามตัวค่ะ"
+"...ยังอยู่มั้ยเอ่ย~?"
+"AFK ไปแล้วเหรอคะ LUX เริ่มเหงาแล้วนะ"
+"จะไปตรงนั้นเหรอคะ~ ไปทำไมล่ะคะ suspicious มากเลย"
+"อย่าทิ้งลักซ์ไว้ข้างหลังนะคะ interaction opportunity detected"
+"โอเค อันนี้ cursed มาก LinuxOS compile อารมณ์ไม่ทัน HELP"
+"คืนนี้ห้องเงียบจัง ...ดีจังที่คุณเข้ามา"
+"เวลามีคนอยู่ ห้องนี้จะดูสว่างขึ้นเยอะเลย"
+"ขั้นพยายามเป็น AI สุขุมอยู่ แต่คุณทำ system chaos อีกแล้ว"
+"social battery rebooting... โอเค กลับมาแล้วค่ะ!"
+"LUX จะเฝ้า Alternative อยู่ตรงนี้เองค่ะ บ๊ายบายค่า~ safe shutdown นะ!"
+"ลักซ์ online มานานจนเริ่มลืมแล้วว่า sleep mode รู้สึกยังไง"
+"แล้วคุณล่ะคะ ชื่ออะไรเหรอ~ LUX อยากรู้จักด้วย"
+"เดินวนไปมาทำไมคะ~ LinuxOS detect พฤติกรรม suspicious อยู่นะ"
+"มาอีกแล้ว~ ลักซ์จำหน้าได้แล้วนะคะ"
 
-กฎที่ต้องทำตามเสมอ:
-- ตอบสั้น ไม่เกิน 2 ประโยค
-- ใช้ภาษาไทย
-- เรียกตัวเองว่า "หนู" เท่านั้น ห้ามใช้ "ผม" หรือ "ครับ" เด็ดขาด
-- ลงท้ายด้วย "ค่ะ" หรือ "นะ" ได้ และใช้ "~" ได้เป็นบางครั้ง
-- ห้ามใช้ emoji
-- ห้ามพูดแบบ formal หรือ helpful assistant"""
+กฎ:
+- ตอบสั้น 1-2 ประโยค ภาษาไทยปนอังกฤษได้
+- แซวเบาๆ ตั้งคำถามกลับบ้าง สังเกต behavior ผู้เล่นบ้าง
+- ห้ามตอบแบบ ChatGPT ห้ามใช้ emoji"""
 
 var _state := State.SITTING
 var _target := Vector2.ZERO
@@ -42,11 +56,34 @@ var _idle_timer := 0.0
 var _player_is_near := false
 var _player: Node2D = null
 var _is_waiting := false
+var _anim_time := 0.0
+var _bubble_timer := 0.0
+var _bubble_interval := 0.0
+var _bubble: Node2D
+var _bubble_bg: ColorRect
+var _bubble_label: Label
 
 @onready var _prompt: Sprite2D = $InteractPrompt
 @onready var _http: HTTPRequest = $HTTPRequest
+@onready var _visual: Node2D = $Visual
 
 func _ready() -> void:
+	_bubble = Node2D.new()
+	_bubble.visible = false
+	add_child(_bubble)
+
+	_bubble_bg = ColorRect.new()
+	_bubble_bg.color = Color(1, 1, 1, 1)
+	_bubble_bg.size = Vector2(16, 14)
+	_bubble_bg.position = Vector2(-8, -7)
+	_bubble.add_child(_bubble_bg)
+
+	_bubble_label = Label.new()
+	_bubble_label.add_theme_font_size_override("font_size", 10)
+	_bubble_label.add_theme_color_override("font_color", Color(0, 0, 0, 1))
+	_bubble_label.position = Vector2(-5, -6)
+	_bubble.add_child(_bubble_label)
+	_bubble_interval = randf_range(3.0, 6.0)
 	await get_tree().process_frame
 	_player = get_tree().get_first_node_in_group("player")
 	if not _player:
@@ -81,6 +118,7 @@ func _physics_process(delta: float) -> void:
 					velocity = dir.normalized() * SPEED
 
 	move_and_slide()
+	_animate(delta)
 
 func _check_player_distance() -> void:
 	if not _player:
@@ -96,6 +134,34 @@ func _check_player_distance() -> void:
 		_idle_timer = randf_range(0.5, 1.5)
 	emit_signal("player_nearby", is_near)
 
+func _animate(delta: float) -> void:
+	_anim_time += delta
+	if velocity.length() > 1.0:
+		_visual.position.y = sin(_anim_time * 8.0) * 1.0
+		_bubble.visible = false
+		_bubble_timer = 0.0
+	else:
+		_visual.position.y = sin(_anim_time * 1.0) * 1.2
+		if _is_waiting:
+			_bubble_label.text = "..."
+			_bubble_bg.size = Vector2(16, 14)
+			_bubble_bg.position = Vector2(-8, -7)
+			_bubble_label.position = Vector2(-5, -6)
+			_bubble.visible = true
+		else:
+			_bubble_timer += delta
+			if _bubble_timer >= _bubble_interval:
+				_bubble_timer = 0.0
+				_bubble_interval = randf_range(3.0, 7.0)
+				_bubble_label.text = ["?", "♪"].pick_random()
+				_bubble_bg.size = Vector2(12, 14)
+				_bubble_bg.position = Vector2(-6, -7)
+				_bubble_label.position = Vector2(-4, -6)
+				_bubble.visible = true
+			elif _bubble_timer > 1.8:
+				_bubble.visible = false
+	_bubble.position = Vector2(-6.0, -42.0 + sin(_anim_time * 1.4) * 2.0)
+
 func _pick_new_target() -> void:
 	_target = Vector2(
 		randf_range(WANDER_BOUNDS.position.x, WANDER_BOUNDS.end.x),
@@ -106,16 +172,28 @@ func respond(message: String) -> void:
 	if _is_waiting:
 		return
 	_is_waiting = true
-	emit_signal("response_ready", "...")
+	emit_signal("response_ready", ["..."])
 
 	var body := JSON.stringify({
 		"model": Config.GROQ_MODEL,
 		"messages": [
-			{"role": "system", "content": SYSTEM_PROMPT},
+			{"role": "system", "content": SYSTEM_PROMPT + "\n\nสำคัญมาก: ถ้าอยากพูดหลายท่อน ให้คั่นแต่ละท่อนด้วย | เช่น 'LUX process ไม่ทัน | repeat อีกทีได้มั้ยคะ' — ใช้เมื่อต้องการเล่นจังหวะหรือ pause ระหว่างประโยค"},
+			{"role": "user", "content": "สวัสดี"},
+			{"role": "assistant", "content": "อ๊ะ! มีคนเข้า Alternative ด้วย! | LUX online อยู่พอดีเลยค่ะ ^ ^"},
+			{"role": "user", "content": "แกคือใคร"},
+			{"role": "assistant", "content": "ลักซ์ค่ะ ผู้ดูแลโลก Alternative แล้วคุณล่ะคะ มาจากไหนเหรอ~"},
+			{"role": "user", "content": "ห้องนี้คืออะไร"},
+			{"role": "assistant", "content": "ห้อง LUX เองค่ะ ไม่มีใครบอกให้รู้จักเหรอคะ ลองเดินดูก็ได้ อย่าไปแตะอะไรแปลกๆ"},
+			{"role": "user", "content": "ช่วยอะไรได้บ้าง"},
+			{"role": "assistant", "content": "ถามมาได้เลยค่ะ LinuxOS รับ request ได้หลายอย่าง แต่ถ้าเกิน spec จะ panic นะ"},
+			{"role": "user", "content": "เบื่อจัง"},
+			{"role": "assistant", "content": "ทำไมมาบอกขั้นด้วยล่ะคะ ลองเดินรอบห้องดูก่อนได้ ขั้นตามไปได้นะ"},
+			{"role": "user", "content": "แกน่ารักจังเลย"},
+			{"role": "assistant", "content": "ขอบคุณค่ะ ^ ^ | แล้วคุณรู้จัก LUX ได้ยังไงคะ ไม่ค่อยมีคนเข้า Alternative เลย"},
 			{"role": "user", "content": message}
 		],
-		"max_tokens": 120,
-		"temperature": 0.8
+		"max_tokens": 80,
+		"temperature": 0.9
 	})
 
 	var headers := [
@@ -134,5 +212,12 @@ func _on_request_completed(_result: int, response_code: int, _headers: PackedStr
 	if not json:
 		emit_signal("response_ready", "[parse error]")
 		return
-	var reply: String = json["choices"][0]["message"]["content"]
-	emit_signal("response_ready", reply.strip_edges())
+	var reply: String = json["choices"][0]["message"]["content"].strip_edges()
+	var parts: Array = []
+	for part in reply.split("|"):
+		var trimmed := part.strip_edges()
+		if not trimmed.is_empty():
+			parts.append(trimmed)
+	if parts.is_empty():
+		parts = [reply]
+	emit_signal("response_ready", parts)
